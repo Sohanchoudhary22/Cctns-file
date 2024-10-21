@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(236, 242, 247);
+
+        }
+        table{
+            /* border: 1px solid gray; */
+            width: 100%;
+            height: 220px;
+            margin:50px auto;
+        }
+        label{
+            margin: 20px;
+            font-size: 24px;
+        }
+        select{
+            width: 80%;
+            height: 30px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td id="td1"><label for="">A</label>
+                <select name="a" id="A">
+                <option value="0">.........select........</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+            </select></td>
+
+            <td id="td2"><label for="">B</label>
+                <select name="b" id="B" onchange="changeB()">
+                <option value="0">.........select........</option>
+                <option value="3">Major</option>
+                <option value="4">Minor</option>
+                <option value="5">Other</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td id="td3"><label for="">C</label>
+                <select name="c" id="C" onchange="changeC()">
+                <option value="0">.........select........</option>
+                <option value="6">Yes</option>
+                <option value="7">No</option>
+            </select></td>
+
+            <td id="td4"><label for="">D</label>
+                <select name="d" id="D" onchange="changeD(),changeB()">
+                <option value="0">.........select........</option>
+                <option value="3">Major</option>
+                <option value="4">Minor</option>
+                <option value="5">Other</option>
+            </select></td>
+
+            <td id="td5"><label for="">E</label>
+                <select name="e" id="E">
+                <option value="0">.........select........</option>
+                <option value="8">New</option>
+                <option value="9">Old</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td id="td6"><label for="">F</label>
+                <select name="f" id="F" onchange="changeF()">
+                <option value="0">.........select........</option>
+                <option value="6">Yes</option>
+                <option value="7">No</option>
+            </select></td>
+
+            <td id="td7"><label for="">G</label>
+                <select name="g" id="G">
+                <option value="0">.........select........</option>
+                <option value="10">Boy</option>
+                <option value="11">Girl</option>
+            </select></td>
+
+            <td id="td8"><label for="">H</label>
+                <select name="h" id="H">
+                <option value="0">.........select........</option>
+                <option value="13">Major(A)</option>
+                <option value="13">Major(B)</option>
+                <option value="14">Major(c)</option>
+                <option value="15">Major(D)</option>
+                <option value="16">Other</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td id="td9"><label for="">I</label>
+                <select name="i" id="I" onchange="changeI()">
+                <option value="0">.........select........</option>
+                <option value="6">Yes</option>
+                <option value="7">No</option>
+            </select></td>
+
+            <td id="td10"><label for="">J</label>
+                <select name="j" id="J">
+                <option value="0">.........select........</option>
+                <option value="17">Male</option>
+                <option value="18">Female</option>
+            </select></td>
+
+            <td id="td11"><label for="">K</label>
+                <select name="k" id="K" onchange="changeK()">
+                <option value="0">.........select........</option>
+                <option value="3">Major</option>
+                <option value="4">Minor</option>
+                <option value="5">Other</option>
+            </select></td>
+        </tr>
+    </table>
+    
+    <script>
+        window.onload = function (){
+            changeC();
+            changeF();
+            changeI();
+        }
+        
+        function changeC() {
+            const valC = document.getElementById("C").value;
+            const dTD =document.getElementById("td4");
+            console.log(valC);
+            if (valC!= 6) {
+                dTD.style.display = "none";
+                document.getElementById("D").value = 0;
+            }else{
+                dTD.style.display = "table-cell"
+            } 
+            changeD()
+        }
+
+        function changeD(){
+            const valD = document.getElementById("D").value;
+            const valB = document.getElementById("B").value;
+            const valK = document.getElementById("K");
+            const eTD =document.getElementById("td5");
+            console.log(valD);
+            if (valD==3) {
+                eTD.style.display = "table-cell"                
+            }
+            else{
+                eTD.style.display = "none"
+            }
+        }
+
+        function changeF() {
+            const valF = document.getElementById("F").value;
+            const gTD =document.getElementById("td7");
+            const hTD =document.getElementById("td8");
+            console.log(valF);
+            if(valF != 6){
+                 gTD.style.display = "none"
+                 hTD.style.display = "none"
+            }else{
+                gTD.style.display = "table-cell"
+                hTD.style.display = "table-cell"
+            }
+
+        }
+
+        function changeI() {
+            const valI = document.getElementById("I").value;
+            const jTD =document.getElementById("td10");
+            const kTD =document.getElementById("td11");
+            console.log(valI);
+            if(valI != 6){
+                jTD.style.display = "none"
+                kTD.style.display = "none"
+            }else{
+                jTD.style.display = "table-cell"
+                kTD.style.display = "table-cell"
+            }
+
+        }
+        
+        function changeB() {
+            const valB = document.getElementById("B");
+            const valD = document.getElementById("D");
+            if (valB.value ==3 && valD.value ==4) {
+                alert("You cannot select Minor in D while B is Major.");
+                document.getElementById("D").value = 0;
+            }
+        }
+        function changeK(){
+            const valK = document.getElementById("K");
+            const valB = document.getElementById("B");
+            if (valB.value ==3 && valK.value ==4){
+                alert("You cannot select Minor in K while B is Major.");
+                document.getElementById("K").value = 0;
+            }
+
+
+        }
+
+    </script>
+</body>
+</html>
